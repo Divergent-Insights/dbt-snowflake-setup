@@ -1,0 +1,102 @@
+# dbtgen: 0.0.1 (manually generated)
+# timestamp: 2022-03-23
+
+# Template usage instructions
+# Find and replace the following:
+# First: find: "replace_with_data_pipeline_name" and replace with "data_pipeline_name", all in lowercase
+# where my "data_pipeline_name" represents the name of the data pipeline
+#
+# Second: find "REPLACE_WITH_DATA_SOURCE_NAME" and replace with "SNOWFLAKE_DATABASE_NAME", all in uppercase
+# where "SNOWFLAKE_DATABASE" is uppercase and represents the name of your data source
+
+# dbt project configuration file details available on
+# https://docs.getdbt.com/reference/dbt_project.yml
+
+
+# Update with "data_pipeline_name" e.g. "sap"
+# dbt recommends using snake_case: https://docs.getdbt.com/faqs/project-name
+name: 'custom_dbt_utils'
+
+vars:
+  'dbt_date:time_zone': 'Australia/Perth'  # Change as required e.g. America/Houston
+
+# dbt project version
+# This parameters is required; however, it is not meaninfully used by dbt yet
+# https://docs.getdbt.com/reference/project-configs/version
+version: '1.0.0'
+
+# dbt_project.yml file version
+# https://docs.getdbt.com/reference/project-configs/config-version
+config-version: 2
+
+# define the profile used by this project
+# Profiles are defined in the file 'profiles.yml'
+# https://docs.getdbt.com/reference/profiles.yml
+profile: 'snowflake'
+
+
+# dbt directories configuration
+
+# Models and sources location
+# https://docs.getdbt.com/reference/project-configs/model-paths
+# source-paths: ["data/models"]  # use with dbt 0.x
+model-paths: ["data/models"]  # use with dbt 1.x
+
+# Seed files location
+# https://docs.getdbt.com/reference/project-configs/seed-paths
+# data-paths: ["data/seeds"]  # use with dbt 0.x
+seed-paths: ["data/seeds"]  # use with dbt 1.x
+
+# Tests location
+# https://docs.getdbt.com/reference/project-configs/test-paths
+test-paths: ["data/tests"]
+
+# Analysis location
+# https://docs.getdbt.com/reference/project-configs/analysis-paths
+analysis-paths: ["data/analysis"]
+
+# Macros location
+# https://docs.getdbt.com/reference/project-configs/macro-paths
+macro-paths: ["data/macros"]
+
+# Macros location
+# https://docs.getdbt.com/reference/project-configs/macro-paths
+macro-paths: ["data/macros"]
+
+# Snashots location
+# https://docs.getdbt.com/reference/project-configs/snapshot-paths
+snapshot-paths: ["data/snapshots"]
+
+# Documentation blocks location
+# https://docs.getdbt.com/reference/project-configs/docs-paths
+docs-paths: ["data/docs"]
+
+# Files in this directory are copied into target/ as part of dbt docs generate
+# https://docs.getdbt.com/reference/project-configs/asset-paths
+asset-paths: ["data/assets"]
+
+# Logs location (this include outputs from dbt test)
+# https://docs.getdbt.com/reference/project-configs/log-path
+log-path: "{{ env_var('DBT_LOG_PATH', 'data/logs') }}"
+
+# Packages installation location
+# This directory should be added to .gitignore
+# https://docs.getdbt.com/reference/project-configs/packages-install-path
+# modules-path: "data/modules"  # use with dbt 0.x
+packages-install-path: "data/packages"  # use with dbt 1.x
+
+# Directory where all compiled output is placed
+log-path: "{{ env_var('DBT_TARGET_PATH', 'data/target') }}"
+
+# Directories cleaned by dbt clean
+clean-targets:
+  - "data/target"
+  - "data/packages"
+
+
+# String added as a comment to all queries runs by dbt
+# https://docs.getdbt.com/reference/project-configs/query-comment
+query-comment:
+  # Snowflake removes leading SQL comments
+  # More details: https://docs.snowflake.com/en/release-notes/2017-04.html#queries-leading-comments-removed-during-execution
+  append: true
