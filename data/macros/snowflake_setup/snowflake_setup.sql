@@ -8,7 +8,7 @@
 
     {% do log("Snowflake Setup", info=True) %}
     {% set main %}
-        {{ snowflake_setup_role(role) }}
+        {{ custom_dbt_utils.snowflake_setup_role(role) }}
         {% do log("Role setup: " ~ role, info=True) %}
 
         {{ snowflake_setup_warehouse(role, warehouse) }}
