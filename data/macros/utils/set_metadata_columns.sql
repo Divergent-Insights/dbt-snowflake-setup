@@ -1,4 +1,4 @@
-{ % macro set_metadata_columns %}
+{% macro set_metadata_columns %}
 
     {#
         Divergent Insights. All Rights Reserved
