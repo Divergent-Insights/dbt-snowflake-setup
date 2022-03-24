@@ -1,7 +1,6 @@
 {% macro snowflake_setup_schema(role, schema, database) %}
 
     -- Internal Stage Setup
-    SELECT 1;
     CREATE SCHEMA IF NOT EXISTS {{ database }}.{{ schema }} WITH MANAGED ACCESS;
 
     GRANT USAGE ON SCHEMA {{ database }}.{{ schema }} TO ROLE {{ role }};
