@@ -1,4 +1,4 @@
-{% macro snowflake_setup(database="MY_DATABASE", schema="MY_SCHEMA", role="MY_ROLE", warehouse="MY_WAREHOUSE", user="MY_USER", internal_stage="INTERNAL_STAGE") %}
+{% macro snowflake_setup(database="MY_DATABASE", schema="MY_SCHEMA", role="MY_ROLE", warehouse="MY_WAREHOUSE", user="MY_USER", internal_stage="INTERNAL_STAGE", file_format="JSON") %}
 
     {% do log("Start transaction", info=True) %}
     {% set begin_transaction %}
@@ -25,7 +25,7 @@
         {% do log("User setup: " ~ user, info=True) %}
         {% do log("User temporary password: " ~ password, info=True) %}
 
-        {{ custom_dbt_utils.snowflake_setup_internal_stage(role, internal_stage, database, schema) }}
+        {{ custom_dbt_utils.snowflake_setup_internal_stage(role, internal_stage, file_format, database, schema) }}
         {% do log("Internal Stage setup: " ~ internal_stage, info=True) %}
 
     {% endset %}    

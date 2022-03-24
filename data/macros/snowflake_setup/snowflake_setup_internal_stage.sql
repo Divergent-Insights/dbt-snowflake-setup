@@ -1,4 +1,4 @@
-{% macro snowflake_setup_internal_stage(role, internal_stage, file_format, database, schema) %}
+{% macro snowflake_setup_internal_stage(role, stage, file_format, database, schema) %}
 
     {%- if file_format == 'JSON' -%}
 
@@ -8,9 +8,9 @@
     
 
     -- Internal Stage Setup
-    CREATE STAGE IF NOT EXISTS {{ database }}.{{ schema }}.{{ internal_stage }}
+    CREATE STAGE IF NOT EXISTS {{ database }}.{{ schema }}.{{ stage }}
         FILE_FORMAT = {{ file_format }}_FORMAT;
 
-    GRANT READ, WRITE ON STAGE {{ database }}.{{ schema }}.{{ internal_stage }} TO ROLE {{ role }};
+    GRANT READ, WRITE ON STAGE {{ database }}.{{ schema }}.{{ stage }} TO ROLE {{ role }};
 
 {% endmacro %}
