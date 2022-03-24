@@ -2,7 +2,7 @@
 
     {%- if file_format == 'JSON' -%}
 
-        CREATE OR REPLACE FILE FORMAT {{ file_format }}_FORMAT TYPE = '{{ file_format }}' STRIP_OUTER_ARRAY = TRUE;
+        CREATE OR REPLACE FILE FORMAT {{ database }}.{{ schema }}.{{ file_format }}_FORMAT TYPE = '{{ file_format }}' STRIP_OUTER_ARRAY = TRUE;
 
     {%- endif -%}
     
