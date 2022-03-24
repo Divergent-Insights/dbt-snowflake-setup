@@ -11,21 +11,21 @@
         {{ custom_dbt_utils.snowflake_setup_role(role) }}
         {% do log("Role setup: " ~ role, info=True) %}
 
-        {{ snowflake_setup_warehouse(role, warehouse) }}
+        {{ custom_dbt_utils.snowflake_setup_warehouse(role, warehouse) }}
         {% do log("Warehouse setup: " ~ warehouse, info=True) %}
 
-        {{ snowflake_setup_database(role, database) }}
+        {{ custom_dbt_utils.snowflake_setup_database(role, database) }}
         {% do log("Database setup: " ~ database, info=True) %}
 
-        {{ snowflake_setup_schema(role, schema, database) }}
+        {{ custom_dbt_utils.snowflake_setup_schema(role, schema, database) }}
         {% do log("Schema setup: " ~ schema, info=True) %}
 
         {% set password = "MyTemporaryPassword" %}
-        {{ snowflake_setup_user(role, user, password, warehouse) }}
+        {{ custom_dbt_utils.snowflake_setup_user(role, user, password, warehouse) }}
         {% do log("User setup: " ~ user, info=True) %}
         {% do log("User temporary password: " ~ password, info=True) %}
 
-        {{ snowflake_setup_internal_stage(role, internal_stage, database, schema) }}
+        {{ custom_dbt_utils.snowflake_setup_internal_stage(role, internal_stage, database, schema) }}
         {% do log("Internal Stage setup: " ~ internal_stage, info=True) %}
 
     {% endset %}    
