@@ -14,6 +14,6 @@
 
         {{ custom_schema_name | trim }}
 
-    {%- enfif -%}
+    {%- endif -%}
 
 {%- endmacro %}
