@@ -27,6 +27,7 @@
 
         {{ custom_dbt_utils.snowflake_setup_internal_stage(role, internal_stage, file_format, database, schema) }}
         {% do log("Internal Stage setup: " ~ internal_stage, info=True) %}
+        {% do log("Internal Stage file format: " ~ file_format, info=True) %}
 
     {% endset %}    
     {% do run_query(main) %}
