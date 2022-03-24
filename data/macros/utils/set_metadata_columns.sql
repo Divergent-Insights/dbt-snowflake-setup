@@ -1,4 +1,4 @@
-{% macro set_metadata_columns %}
+{% macro set_metadata_columns() %}
 
     {#
         Divergent Insights. All Rights Reserved
@@ -12,4 +12,4 @@
     MD_PIPELINE_NAME VARCHAR COMMENT 'Metadata columns',
     MD_COMMIT_ID VARCHAR COMMENT 'Metadata columns'
 
-{ % endmacro %}
+{% endmacro %}
