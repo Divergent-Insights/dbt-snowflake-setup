@@ -4,12 +4,11 @@
         Divergent Insights. All Rights Reserved
     #}
 
-    MD_DATA_SOURCE VARCHAR COMMENT 'Metadata columns',
-    MD_PIPELINE_ID VARCHAR COMMENT 'Metadata columns',
-    MD_BATCH_ID VARCHAR COMMENT 'Metadata columns',
-    MD_CREATION_DATE_UTC TIMESTAMP_TZ COMMENT 'Metadata columns',
-    MD_UPDATE_DATE_UTC TIMESTAMP_TZ COMMENT 'Metadata columns',
-    MD_PIPELINE_NAME VARCHAR COMMENT 'Metadata columns',
-    MD_COMMIT_ID VARCHAR COMMENT 'Metadata columns'
+    md_data_source varchar comment 'metadata column',
+    md_pipeline_id varchar comment 'metadata column',
+    md_batch_id varchar comment 'metadata column',
+    md_creation_date_utc timestamp_tz comment 'metadata column',
+    md_update_date_utc timestamp_tz comment 'metadata column',
+    md_commit_id varchar comment 'metadata column'
 
 {% endmacro %}
