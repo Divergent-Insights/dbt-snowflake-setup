@@ -8,12 +8,24 @@
 
     {% do log("Snowflake Setup", info=True) %}
     {% set main %}
+        {{ custom_dbt_utils.snowflake_setup1_account() }}
+        {% do log("Account setup", info=True) %}
+
+        -- Setting everything uppercase to avoid Snowflake quoting and casing nightmares
+        {% set database = database.upper() %}
+        {% set schema = schema.upper() %}
+        {% set role = role.upper() %}
+        {% set user = user.upper() %}
+        {% set internal_stage = internal_stage.upper() %}
+
         {{ custom_dbt_utils.snowflake_setup1_role(role) }}
         {% do log("Role setup: " ~ role, info=True) %}
 
-        {{ custom_dbt_utils.snowflake_setup1_warehouse(role, 'nonprod_warehouse1') }}
+        {% set nonprod_warehouse1 = "nonprod_warehouse1" %}        
+        {{ custom_dbt_utils.snowflake_setup1_warehouse(role, nonprod_warehouse1) }}
         {% do log("Warehouse setup: " ~ warehouse, info=True) %}
-        {{ custom_dbt_utils.snowflake_setup1_warehouse(role, 'prod_warehouse1') }}
+        {% set prod_warehouse1 = "prod_warehouse1" %}        
+        {{ custom_dbt_utils.snowflake_setup1_warehouse(role, prod_warehouse1) }}
         {% do log("Warehouse setup: " ~ warehouse, info=True) %}
 
         {{ custom_dbt_utils.snowflake_setup1_database(role, database) }}
@@ -22,10 +34,11 @@
         {{ custom_dbt_utils.snowflake_setup1_schema(role, schema, database) }}
         {% do log("Schema setup: " ~ schema, info=True) %}
 
-        {% set password = "MyTemporaryPassword" %}
-        {{ custom_dbt_utils.snowflake_setup1_user(role, user, password, warehouse) }}
+        {% set password = "MyTemporaryPassword" %}        
+        {{ custom_dbt_utils.snowflake_setup1_user(role, user, password, nonprod_warehouse1, database) }}
         {% do log("User setup: " ~ user, info=True) %}
         {% do log("User temporary password: " ~ password, info=True) %}
+        {% do log("Temporary password must be reset at https://app.snowflake.com/", info=True) %}
 
         {{ custom_dbt_utils.snowflake_setup1_internal_stage(role, internal_stage, file_format, database, schema) }}
         {% do log("Internal Stage setup: " ~ internal_stage, info=True) %}

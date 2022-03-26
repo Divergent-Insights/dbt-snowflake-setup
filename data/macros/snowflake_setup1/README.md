@@ -1,5 +1,8 @@
 Snowflake Setup 1
 Storage: decentralised where each database represents a source system
+  - Database: Source System
+  - Schema: raw | qa
+  - Table: Source system table_name
 Compute: 
   - Centralised: there are two types of warehouses for the whole organization: nonprod and prod
   - More warehouses can be added as required to cope with demand e.g. nonprod_warehouse1, nonprod_warehouse2, prod_warehouse1
