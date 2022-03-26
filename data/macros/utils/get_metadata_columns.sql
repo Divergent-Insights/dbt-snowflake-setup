@@ -1,4 +1,4 @@
-{% macro set_metadata_columns() %}
+{% macro get_metadata_columns() %}
 
     md_data_source,
     md_pipeline_id,

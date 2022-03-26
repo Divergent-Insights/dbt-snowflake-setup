@@ -1,6 +1,6 @@
-{% macro snowflake_setup(database="MY_DATABASE", schema="MY_SCHEMA", role="MY_ROLE", warehouse="MY_WAREHOUSE", user="MY_USER", internal_stage="INTERNAL_STAGE", file_format="JSON") %}
+{% macro snowflake_setup1_create(database="my_database", schema="my_schema", role="my_loader_role", user="my_loader_user", internal_stage="internal_stage", file_format="json") %}
 
-    {% do log("Start transaction", info=True) %}
+    {% do log("snowflake_setup1_create started", info=True) %}
     {% set begin_transaction %}
     BEGIN TRANSACTION;
     {% endset %}
@@ -8,24 +8,26 @@
 
     {% do log("Snowflake Setup", info=True) %}
     {% set main %}
-        {{ custom_dbt_utils.snowflake_setup_role(role) }}
+        {{ custom_dbt_utils.snowflake_setup1_role(role) }}
         {% do log("Role setup: " ~ role, info=True) %}
 
-        {{ custom_dbt_utils.snowflake_setup_warehouse(role, warehouse) }}
+        {{ custom_dbt_utils.snowflake_setup1_warehouse(role, 'nonprod_warehouse1') }}
+        {% do log("Warehouse setup: " ~ warehouse, info=True) %}
+        {{ custom_dbt_utils.snowflake_setup1_warehouse(role, 'prod_warehouse1') }}
         {% do log("Warehouse setup: " ~ warehouse, info=True) %}
 
-        {{ custom_dbt_utils.snowflake_setup_database(role, database) }}
+        {{ custom_dbt_utils.snowflake_setup1_database(role, database) }}
         {% do log("Database setup: " ~ database, info=True) %}
 
-        {{ custom_dbt_utils.snowflake_setup_schema(role, schema, database) }}
+        {{ custom_dbt_utils.snowflake_setup1_schema(role, schema, database) }}
         {% do log("Schema setup: " ~ schema, info=True) %}
 
         {% set password = "MyTemporaryPassword" %}
-        {{ custom_dbt_utils.snowflake_setup_user(role, user, password, warehouse) }}
+        {{ custom_dbt_utils.snowflake_setup1_user(role, user, password, warehouse) }}
         {% do log("User setup: " ~ user, info=True) %}
         {% do log("User temporary password: " ~ password, info=True) %}
 
-        {{ custom_dbt_utils.snowflake_setup_internal_stage(role, internal_stage, file_format, database, schema) }}
+        {{ custom_dbt_utils.snowflake_setup1_internal_stage(role, internal_stage, file_format, database, schema) }}
         {% do log("Internal Stage setup: " ~ internal_stage, info=True) %}
         {% do log("Internal Stage file format: " ~ file_format, info=True) %}
 
@@ -38,5 +40,5 @@
     {% do run_query(end_transaction) %}
     {% do log("End transaction", info=True) %}
 
-    {% do log("snowflake_setup executed", info=True) %}
+    {% do log("snowflake_setup1_create finished", info=True) %}
 {% endmacro %}
