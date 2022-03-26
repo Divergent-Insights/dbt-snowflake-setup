@@ -1,4 +1,4 @@
-{% macro snowflake_load_internal_stage(database, schema, stage, file, overwrite="true") %}
+{% macro snowflake_clean_internal_stage(database, schema, stage, pattern="*.*") %}
 
     -- Load Internal Stage
     -- Note file must contain full path location e.g. "/tmp/my_file.json"
@@ -7,14 +7,13 @@
     {% do log("Schema: " ~ schema, info=True) %}
     {% do log("Stage: " ~ stage, info=True) %}
     {% do log("File: " ~ file, info=True) %}
-    {% do log("Overwrite: " ~ overwrite, info=True) %}
 
     {% set sql %}
-        put file://{{ file }} @{{ database }}.{{ schema }}.{{ stage }} auto_compress=true overwrite = {{ overwrite }};
+        remove @{{ database }}.{{ schema }}.{{ stage }} pattern='.{{ pattern }}';
     {% endset %}    
     {% do run_query(sql) %}
 
     {% do log(sql, info=True) %}
-    {% do log("snowflake_load_internal_stage completed", info=True) %}
+    {% do log("snowflake_clean_internal_stage completed", info=True) %}
 
 {% endmacro %}
