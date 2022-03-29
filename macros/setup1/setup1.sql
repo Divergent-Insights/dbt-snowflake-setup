@@ -26,10 +26,10 @@
         -- Warehouses
         {% set nonprod_warehouse1 = "nonprod_warehouse1" %}        
         {{ snowflake_env_setup.setup1_warehouse(role, nonprod_warehouse1) }}
-        {% do log("Warehouse setup: " ~ warehouse, info=True) %}
+        {% do log("Warehouse setup: " ~ nonprod_warehouse1, info=True) %}
         {% set prod_warehouse1 = "prod_warehouse1" %}        
         {{ snowflake_env_setup.setup1_warehouse(role, prod_warehouse1) }}
-        {% do log("Warehouse setup: " ~ warehouse, info=True) %}
+        {% do log("Warehouse setup: " ~ prod_warehouse1, info=True) %}
 
         -- Database
         {{ snowflake_env_setup.setup1_database(role, database) }}
@@ -39,17 +39,18 @@
         {{ snowflake_env_setup.setup1_schema(role, schema, database) }}
         {% do log("Schema setup: " ~ schema, info=True) %}
 
+        -- Internal Stage
+        {{ snowflake_env_setup.setup1_internal_stage(role, internal_stage, file_format, database, schema) }}
+        {% do log("Internal Stage setup: " ~ internal_stage, info=True) %}
+        {% do log("Internal Stage file format: " ~ file_format, info=True) %}
+
         -- User
         {% set password = "MyTemporaryPassword" %}        
         {{ snowflake_env_setup.setup1_user(role, user, password, nonprod_warehouse1, database) }}
         {% do log("User setup: " ~ user, info=True) %}
         {% do log("User temporary password: " ~ password, info=True) %}
         {% do log("Temporary password must be reset at https://app.snowflake.com/", info=True) %}
-
-        -- Internal Stage
-        {{ snowflake_env_setup.setup1_internal_stage(role, internal_stage, file_format, database, schema) }}
-        {% do log("Internal Stage setup: " ~ internal_stage, info=True) %}
-        {% do log("Internal Stage file format: " ~ file_format, info=True) %}
+        {% do log("Account details: " ~ target.account, info=True) %}
 
     {% endset %}    
     {% do run_query(main) %}

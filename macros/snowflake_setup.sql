@@ -3,8 +3,9 @@
     {% do log("snowflake_setup started", info=True) %}
 
     {% if env == 1 %}
-        {{ snowflake_env_setup.snowflake_setup1_account() }}
+        {{ snowflake_env_setup.setup1() }}
     {% endif %}
 
     {% do log("snowflake_setup finished", info=True) %}
+  
 {% endmacro %}

@@ -9,7 +9,8 @@ the most common setups programmatically. This package can be very handy for data
 Check [dbt Hub](https://hub.getdbt.com/montreal-analytics/snowflake_utils/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
 ## Prerequisites
-This package is compatible with dbt 1.0.0 and later.
+- This package is compatible with dbt 1.0.0 and later.
+- Snowflake credentials with the right level of access to create/destroy and configure the following objects: role, user, database, schema, warehouse (these are high level priviledges)
 
 ----
 
