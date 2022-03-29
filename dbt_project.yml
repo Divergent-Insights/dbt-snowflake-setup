@@ -1,11 +1,11 @@
-name: 'snowflake_setup'
+name: 'snowflake_env_setup'
 version: '0.0.1'
 
 config-version: 2
 
-require-dbt-version: ">=0.17.0"
+require-dbt-version: ">=1.0.0"
 
-
+model-paths: ["models"]
 macro-paths: ["macros"]
 test-paths: ["tests"]
 log-path: "logs"

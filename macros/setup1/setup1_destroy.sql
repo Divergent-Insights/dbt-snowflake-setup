@@ -1,4 +1,4 @@
-{% macro snowflake_setup1_destroy(database="MY_DATABASE", schema="MY_SCHEMA", role="MY_ROLE", warehouse="MY_WAREHOUSE", user="MY_USER") %}
+{% macro setup1_destroy(database="MY_DATABASE", schema="MY_SCHEMA", role="MY_ROLE", warehouse="MY_WAREHOUSE", user="MY_USER") %}
 
     {% do log("snowflake_setup1_destroy started", info=True) %}
     {% set main %}
